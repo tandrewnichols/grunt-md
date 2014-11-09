@@ -1,0 +1,42 @@
+{
+  "name": "grunt-md",
+  "version": "0.0.1",
+  "description": "Compile markdown files with yml view context into html",
+  "main": "./tasks/md.js",
+  "scripts": {
+    "test": "node_modules/.bin/grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tandrewnichols/grunt-md.git"
+  },
+  "keywords": [
+    "gruntplugin",
+    "markdown",
+    "blog",
+    "static",
+    "compile"
+  ],
+  "author": "Andrew Nichols",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tandrewnichols/grunt-md/issues"
+  },
+  "homepage": "https://github.com/tandrewnichols/grunt-md",
+  "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-mocha-cov": "^0.3.0",
+    "grunt-mocha-test": "^0.12.2",
+    "grunt-travis-matrix": "0.0.4",
+    "indeed": "^1.0.6",
+    "jshint-stylish": "^1.0.0",
+    "mocha": "^2.0.1",
+    "mocha-given": "^0.1.3",
+    "mocha-lcov-reporter": "0.0.1",
+    "proxyquire": "^1.0.1",
+    "sinon": "^1.11.1"
+  }
+}
