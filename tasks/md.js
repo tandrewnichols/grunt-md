@@ -7,7 +7,6 @@ var path = require('path');
 
 module.exports = function(grunt) {
   grunt.registerMultiTask('md', 'Compile markdown files with yml view context into html', function() {
-    console.log('md task running');
     var done = this.async();
     var options = this.options({
       flatten: true,
@@ -20,13 +19,15 @@ module.exports = function(grunt) {
         if (err) {
           return next(err);
         }
-        
+
         markedObj.forEach(function(obj, i) {
           if (dest && dest.split('/').pop().indexOf('.') === -1) {
             var thisDest = dest + '/' + (options.flatten ? obj.filename + '.html' : file.src[i]);
             obj.dest = path.normalize(thisDest);
-            obj.origPath = file.src[i];
+          } else {
+            obj.dest = dest;
           }
+          obj.origPath = file.src[i];
         });
 
         next(null, memo.concat(markedObj));

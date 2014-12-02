@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-  console.log('parent gruntfile');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-mocha-cov');
@@ -47,7 +46,8 @@ module.exports = function(grunt) {
       options: {
         reporter: 'spec',
         ui: 'mocha-given',
-        require: 'coffee-script/register'
+        require: 'coffee-script/register',
+        timeout: 5000
       },
       test: {
         src: ['test/**/*.coffee']
@@ -66,6 +66,80 @@ module.exports = function(grunt) {
     },
     matrix: {
       'v0.10': 'codeclimate < coverage/coverage.lcov'
+    },
+    md: {
+      expandForm: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures',
+            src: '**/*.md',
+            dest: 'output/fixtures'
+          },
+          {
+            expand: true,
+            cwd: 'test/more-fixtures',
+            src: '**/*.md',
+            dest: 'output/more-fixtures'
+          }
+        ]
+      },
+      srcDestForm: {
+        src: ['test/**/*.md'],
+        dest: 'output'
+      },
+      fileObjForm: {
+        files: {
+          'output/fixtures': ['test/fixtures/**/*.md'],
+          'output/more-fixtures': ['test/more-fixtures/**/*.md']
+        }
+      },
+      noDest: {
+        src: ['test/**/*.md']
+      },
+      withWrapper: {
+        options: {
+          wrapper: 'test/fixtures/wrapper.html'
+        },
+        'test/banana.html': 'test/fixtures/banana.md'
+      },
+      withObjectWrapper: {
+        options: {
+          wrapper: {
+            banana: 'test/fixtures/wrapper.html',
+            apple: 'test/fixtures/another-wrapper.html'
+          }
+        },
+        output: ['test/fixtures/**/*.md']
+      },
+      withoutFlatten: {
+        options: {
+          flatten: false
+        },
+        output: ['test/fixtures/**/*.md']
+      },
+      withEvent: {
+        options: {
+          event: 'foo'
+        },
+        'test/banana.html': 'test/fixtures/banana.md'
+      },
+      withConfig: {
+        options: {
+          config: 'foo'
+        },
+        output: ['test/fixtures/**/*.md']
+      },
+      withMarkyMarkOptions: {
+        options: {
+          mm: {
+            postCompile: function(html) {
+              return html.replace('banana', 'not-banana');
+            }
+          }
+        },
+        output: ['test/fixtures/**/*.md']
+      }
     }
   });
   
