@@ -15,7 +15,7 @@ describe 'md', ->
     And (done) -> fs.readdir './output/more-fixtures', (err, @moreFixtures) => done()
     Then ->
       expect.chain(@fixtures).to.deep.equal([ 'apple.html', 'banana.html' ])
-        .And.also(@moreFixtures).to.deep.equal([ 'mango.html', 'pear.html' ])
+        .And.also(@moreFixtures).to.deep.equal([ 'mango.html', 'pear.html' ]).test()
 
   context 'src/dest form', ->
     When (done) -> @spawn('srcDestForm').on 'close', -> done()
