@@ -5,6 +5,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-travis-matrix');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadTasks('tasks');
+  grunt.loadTasks('test/tasks');
 
   grunt.initConfig({
     clean: {
@@ -101,34 +102,66 @@ module.exports = function(grunt) {
         options: {
           wrapper: 'test/fixtures/wrapper.html'
         },
-        'test/banana.html': 'test/fixtures/banana.md'
+        files: {
+          'output/banana.html': 'test/fixtures/banana.md'
+        }
       },
       withObjectWrapper: {
+        options: {
+          wrapper: {
+            'test/fixtures/banana.md': 'test/fixtures/wrapper.html',
+            'test/fixtures/apple.md': 'test/fixtures/another-wrapper.html'
+          }
+        },
+        files: {
+          'output': ['test/fixtures/**/*.md']
+        }
+      },
+      withObjectWrapperFilenames: {
         options: {
           wrapper: {
             banana: 'test/fixtures/wrapper.html',
             apple: 'test/fixtures/another-wrapper.html'
           }
         },
-        output: ['test/fixtures/**/*.md']
+        files: {
+          'output': ['test/fixtures/**/*.md']
+        }
+      },
+      withObjectWrapperStar: {
+        options: {
+          wrapper: {
+            banana: 'test/fixtures/wrapper.html',
+            '*': 'test/fixtures/another-wrapper.html'
+          }
+        },
+        files: {
+          'output': ['test/fixtures/**/*.md']
+        }
       },
       withoutFlatten: {
         options: {
           flatten: false
         },
-        output: ['test/fixtures/**/*.md']
+        files: {
+          'output': ['test/fixtures/**/*.md']
+        }
       },
       withEvent: {
         options: {
           event: 'foo'
         },
-        'test/banana.html': 'test/fixtures/banana.md'
+        files: {
+          'output/banana.html': 'test/fixtures/banana.md'
+        }
       },
       withConfig: {
         options: {
-          config: 'foo'
+          config: 'bar'
         },
-        output: ['test/fixtures/**/*.md']
+        files: {
+          'output': ['test/fixtures/**/*.md']
+        }
       },
       withMarkyMarkOptions: {
         options: {
@@ -138,7 +171,9 @@ module.exports = function(grunt) {
             }
           }
         },
-        output: ['test/fixtures/**/*.md']
+        files: {
+          'output/banana.html': ['test/fixtures/banana.md']
+        }
       }
     }
   });

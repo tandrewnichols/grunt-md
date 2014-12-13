@@ -51,7 +51,7 @@ module.exports = function(grunt) {
           if (options.wrapper) {
             var wrapper = options.wrapper;
             if (_.isPlainObject(wrapper)) {
-              wrapper = wrapper[obj.origPath];
+              wrapper = wrapper[obj.origPath] || wrapper[obj.filename] || wrapper['*'];
             } else if (typeof wrapper !== 'string') {
               grunt.log.warn('Wrapper type not supported: options.wrapper must be an object or a string.');
               next();
