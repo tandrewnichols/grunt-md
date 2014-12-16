@@ -27,7 +27,7 @@ Alternatively, install [task-master](http://github.com/tandrewnichols/task-maste
 
 The `md` task is not much different than any other grunt markdown task out there. It uses `marked` for compiling markdown, so it's fast, and allows for code fences, etc. What's different about `grunt-md` is that it wraps the [marky-mark](https://github.com/rickbergfalk/marky-mark) library, which allows for a view context (data to be used when compiling a template) to be specified via yml "front-matter." Say you're writing a blog, and you want, as you reasonable should, to incoporate SEO elements. With most other markdown compilers, you'll have to do some shenanigans to get it working. With `grunt-md`, just write your blog post like this:
 
-```
+```markdown
 ---
 title: Five reasons to use grunt-md
 description: Well, or at least one reason. YML front-matter.
@@ -72,7 +72,9 @@ grunt.initConfig({
   md: {
     options: {
       wrapper: 'views/wrapper.html'
-    }
+    },
+    src: 'posts/**/*.md',
+    dest: 'views/pages'
   }
 });
 ```
@@ -93,7 +95,7 @@ A simple wrapper might look like:
 </html>
 ```
 
-Wrapper can also be an object with different wrappers specified by file path or file name. Use `*` for any files that are using a default wrapper.
+`wrapper` can also be an object with different wrappers specified by file path or file name. Use `*` for any files that are using a default wrapper.
 
 ```javascript
 grunt.initConfig({
@@ -104,11 +106,13 @@ grunt.initConfig({
         'apple': 'views/apple-wrapper.html', // Matches any file named "apple.md"
         '*': 'views/wrapper.html' // All other files
       }
-    }
+    },
+    src: 'posts/**/*.md',
+    dest: 'views/pages'
   }
 });
 ```
 
 #### Flatten
 
-Optional. Default `true`. In addition, to the normal grunt file-specification formats, you can specify `dest` as a directory, in which to put all compiled templates.
+Optional. Default `true`. In addition, to the normal grunt file-specification formats, you can specify `dest` as a directory, in which to put all compiled templates. By default (`flatten: true`), they are all placed at the top level of that directory, but you can use `flatten: false` to preserve the directory structure.
