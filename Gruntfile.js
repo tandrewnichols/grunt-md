@@ -86,10 +86,16 @@ module.exports = function(grunt) {
         ]
       },
       srcDestForm: {
+        options: {
+          flatten: true
+        },
         src: ['test/**/*.md'],
         dest: 'output'
       },
       fileObjForm: {
+        options: {
+          flatten: true
+        },
         files: {
           'output/fixtures': ['test/fixtures/**/*.md'],
           'output/more-fixtures': ['test/more-fixtures/**/*.md']
@@ -111,7 +117,8 @@ module.exports = function(grunt) {
           wrapper: {
             'test/fixtures/banana.md': 'test/fixtures/wrapper.html',
             'test/fixtures/apple.md': 'test/fixtures/another-wrapper.html'
-          }
+          },
+          flatten: true
         },
         files: {
           'output': ['test/fixtures/**/*.md']
@@ -122,7 +129,8 @@ module.exports = function(grunt) {
           wrapper: {
             banana: 'test/fixtures/wrapper.html',
             apple: 'test/fixtures/another-wrapper.html'
-          }
+          },
+          flatten: true
         },
         files: {
           'output': ['test/fixtures/**/*.md']
@@ -133,16 +141,14 @@ module.exports = function(grunt) {
           wrapper: {
             banana: 'test/fixtures/wrapper.html',
             '*': 'test/fixtures/another-wrapper.html'
-          }
+          },
+          flatten: true
         },
         files: {
           'output': ['test/fixtures/**/*.md']
         }
       },
       withoutFlatten: {
-        options: {
-          flatten: false
-        },
         files: {
           'output': ['test/fixtures/**/*.md']
         }
@@ -157,7 +163,8 @@ module.exports = function(grunt) {
       },
       withConfig: {
         options: {
-          config: 'bar'
+          config: 'bar',
+          flatten: true
         },
         files: {
           'output': ['test/fixtures/**/*.md']

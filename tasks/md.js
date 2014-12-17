@@ -9,7 +9,6 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('md', 'Compile markdown files with yml view context into html', function() {
     var done = this.async();
     var options = this.options({
-      flatten: true,
       mm: {}
     });
 
@@ -28,6 +27,7 @@ module.exports = function(grunt) {
             obj.dest = dest;
           }
           obj.origPath = file.src[i];
+          console.log(obj);
         });
 
         next(null, memo.concat(markedObj));

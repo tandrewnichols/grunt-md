@@ -63,9 +63,11 @@ grunt.initConfig({
 
 ### Options
 
+All of the following options are optional. Defaults are indicated where applicable.
+
 #### Wrapper
 
-Optional. The html template in which to embed the compiled markdown. If supplied, the compiled markdown will be available as `content`, and any yml front-matter will be available as defined above.
+The html template in which to embed the compiled markdown. If supplied, the compiled markdown will be available as `content`, and any yml front-matter will be available as defined above.
 
 ```javascript
 grunt.initConfig({
@@ -115,4 +117,23 @@ grunt.initConfig({
 
 #### Flatten
 
-Optional. Default `true`. In addition, to the normal grunt file-specification formats, you can specify `dest` as a directory, in which to put all compiled templates. By default (`flatten: true`), they are all placed at the top level of that directory, but you can use `flatten: false` to preserve the directory structure.
+In addition, to the normal grunt file-specification formats, you can specify `dest` as a directory, in which to put all compiled templates. By default (`flatten: false`), the directory structure is preserved. With `flatten: true`, files are all placed at the top level of the destination directory. This is identical to the way `flatten` works when using the file array format built-in to grunt.
+
+#### Event
+
+A grunt event to emit for each file. The event data will be the object returned by `marky-mark` (plus a couple extra fields):
+
+```js
+{
+  filenameExtension: '.md',
+  filename: "a-dazzling-post",
+  yaml: "title: How to be awesome: 3 easy steps",
+  markdown: "## Step 1\n\nUse grunt-md",
+  content: "<h2>Step 1</h2><p>Use grunt-md",
+  meta: {
+    title: "How to be awesome: 3 easy steps",
+  },
+  dest: 'views/posts',
+  origPath: 'posts'
+}
+```
