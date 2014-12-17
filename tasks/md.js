@@ -27,7 +27,6 @@ module.exports = function(grunt) {
             obj.dest = dest;
           }
           obj.origPath = file.src[i];
-          console.log(obj);
         });
 
         next(null, memo.concat(markedObj));
