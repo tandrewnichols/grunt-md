@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
         markedObj.forEach(function(obj, i) {
           if (dest && dest.split('/').pop().indexOf('.') === -1) {
-            var thisDest = dest + '/' + (options.flatten ? obj.filename + '.html' : file.src[i]);
+            var thisDest = dest + '/' + (options.flatten ? obj.filename + '.html' : file.src[i].replace('.md', '.html'));
             obj.dest = path.normalize(thisDest);
           } else {
             obj.dest = dest;

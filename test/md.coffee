@@ -68,7 +68,7 @@ describe 'md', ->
 
   context 'do not flatten structure', ->
     When (done) -> @spawn('withoutFlatten').on 'close', -> done()
-    Then -> expect(fs.existsSync('./output/test/fixtures/apple.md')).to.be.true()
+    Then -> expect(fs.existsSync('./output/test/fixtures/apple.html')).to.be.true()
 
   context 'event', ->
     When (done) -> @spawn('withEvent').on 'close', -> done()
