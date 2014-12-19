@@ -27,7 +27,7 @@ Alternatively, install [task-master](http://github.com/tandrewnichols/task-maste
 
 The `md` task is not much different than any other grunt markdown task out there. It uses `marked` for compiling markdown, so it's fast, and allows for code fences, etc. What's different about `grunt-md` is that it wraps the [marky-mark](https://github.com/rickbergfalk/marky-mark) library, which allows for a view context (data to be used when compiling a template) to be specified via yml "front-matter." Say you're writing a blog, and you want, as you reasonable should, to incoporate SEO elements. With most other markdown compilers, you'll have to do some shenanigans to get it working. With `grunt-md`, just write your blog post like this:
 
-```markdown
+```
 ---
 title: Five reasons to use grunt-md
 description: Well, or at least one reason. YML front-matter.
@@ -76,7 +76,7 @@ grunt.initConfig({
       wrapper: 'views/wrapper.html'
     },
     src: 'posts/**/*.md',
-    dest: 'views/pages'
+    dest: 'views/posts'
   }
 });
 ```
@@ -110,7 +110,7 @@ grunt.initConfig({
       }
     },
     src: 'posts/**/*.md',
-    dest: 'views/pages'
+    dest: 'views/posts'
   }
 });
 ```
@@ -137,3 +137,85 @@ A grunt event to emit for each file. The event data will be the object returned 
   origPath: 'posts'
 }
 ```
+
+Set this in the config with something like
+
+```js
+grunt.initConfig({
+  md: {
+    options: {
+      event: 'post'
+    },
+    src: 'posts/**/*.md',
+    dest: 'views/posts'
+  }
+});
+```
+
+and then just listen for the event, possibly in another task:
+
+```js
+grunt.event.on('post', function(post) {
+  // Do something with the post data structure
+});
+```
+
+#### Config
+
+Like `event`, this exposes the `marky-mark` object to other tasks, but this does via grunt's internal config mechanism. Just add a config property under options,
+
+```js
+grunt.initConfig({
+  md: {
+    options: {
+      config: 'posts'
+    },
+    src: 'posts/**/*.md',
+    dest: 'views/posts'
+  }
+});
+```
+
+and then in a task that follows `md`, access via `grunt.config.get`. Note each `marky-mark` object will be in a separate sub-object with the filename as a key. So if you process a `banana.md` and an `apple.md`, you can get them like this:
+
+```js
+var posts = grunt.config.get('posts');
+for (var k in posts) {
+  console.log(k); // "banana", "apple"
+  console.log(posts[k]); // marky-mark style object
+}
+```
+
+#### Mm
+
+`marky-mark` itself accepts a variety of options, including:
+
+* preCompile: A function that accepts and returns markdown. Use this if you need to manipulate the markdown prior to compiling it to html.
+* postCompile: A function that accepts and returns html. Use this if you need to manipulate the resultant html before writing it to a file.
+* context: Additional view context variables to provide to the wrapper.
+* marked: Options to pass on to the `marked` module. See [marked](https://github.com/chjj/marked) for more details.
+
+Example:
+
+```js
+grunt.initConfig({
+  md: {
+    options: {
+      mm: {
+        postCompile: function(html) {
+          return html.replace(/h1/g, 'h2');
+        },
+        context: {
+          author: 'Andrew Nichols'
+        }
+      }
+    },
+    src: 'posts/**/*.md',
+    dest: 'views/posts'
+  }
+});
+```
+
+## Contributing
+
+As with all my projects, pull requests and feature requests are welcome. Just use the existing code as a style guide.
