@@ -33,7 +33,7 @@ module.exports = function(grunt) {
       });
     }, function(err, markedObjs) {
       if (err) {
-        return grunt.log.fatal(err);
+        return grunt.fail.fatal(err);
       }
 
       async.each(markedObjs, function(obj, next) {
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
         }
       }, function(err) {
         if (err) {
-          grunt.log.fatal(err);
+          grunt.fail.fatal(err);
         } else {
           grunt.log.writeln(chalk.green(markedObjs.length, 'files compiled'));
         }
