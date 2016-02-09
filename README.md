@@ -42,7 +42,7 @@ You can use yml to specify variables to insert into your html template.
 Then just add interpolation variables (in whatever view compiler format you prefer) to the template you specify in the configuration:
 
 ```html
-<title>{{ title }}</title>
+<title><%= title %></title>
 <!-- etc. -->
 ```
 
@@ -87,12 +87,12 @@ A simple wrapper might look like:
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <meta name="keywords" content="{{ keywords }}">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="keywords" content="<%= keywords %>">
   </head>
   <body>
-    <div class="container content">{{ content }}</div>
+    <div class="container content"><%= content %></div>
   </body>
 </html>
 ```
