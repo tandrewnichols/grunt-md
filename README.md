@@ -218,4 +218,4 @@ grunt.initConfig({
 
 ## Contributing
 
-As with all my projects, pull requests and feature requests are welcome. Just use the existing code as a style guide.
+Please see [the contribution guidelines](CONTRIBUTING.md).
