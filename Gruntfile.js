@@ -3,6 +3,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-mocha-cov');
   grunt.loadNpmTasks('grunt-travis-matrix');
+  grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadTasks('tasks');
   grunt.loadTasks('test/tasks');
@@ -21,6 +23,11 @@ module.exports = function(grunt) {
         newcap: true,
         quotmark: 'single'
       },
+    },
+    open: {
+      coverage: {
+        path: 'coverage/coverage.html'
+      }
     },
     mochacov: {
       lcov: {
@@ -54,20 +61,17 @@ module.exports = function(grunt) {
         src: ['test/**/*.coffee']
       }
     },
-    travis: {
-      options: {
-        targets: [
-          {
-            test: '{{ version }}',
-            when: 'v0.10',
-            tasks: ['mochacov:lcov', 'matrix:v0.10']
-          }
-        ]
-      }
-    },
-    matrix: {
-      'v0.10': 'codeclimate < coverage/coverage.lcov'
-    },
+    //travisMatrix: {
+      //v4: {
+        //test: function() {
+          //return /^v4/.test(process.version);
+        //},
+        //tasks: ['mochacov:lcov', 'exec:codeclimate']
+      //}
+    //},
+    //exec: {
+      //codeclimate: 'codeclimate-test-reporter < coverage/coverage.lcov'
+    //},
     md: {
       expandForm: {
         files: [
@@ -188,5 +192,5 @@ module.exports = function(grunt) {
   grunt.registerTask('mocha', ['mochaTest']);
   grunt.registerTask('default', ['jshint:all', 'clean', 'mocha']);
   grunt.registerTask('coverage', ['mochacov:html']);
-  grunt.registerTask('ci', ['jshint:all', 'mocha', 'travis']);
+  grunt.registerTask('ci', ['jshint:all', 'mocha']);
 };
