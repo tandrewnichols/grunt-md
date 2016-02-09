@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tandrewnichols/grunt-md.png)](https://travis-ci.org/tandrewnichols/grunt-md) [![downloads](http://img.shields.io/npm/dm/grunt-md.svg)](https://npmjs.org/package/grunt-md) [![npm](http://img.shields.io/npm/v/grunt-md.svg)](https://npmjs.org/package/grunt-md) [![Code Climate](https://codeclimate.com/github/tandrewnichols/grunt-md/badges/gpa.svg)](https://codeclimate.com/github/tandrewnichols/grunt-md) [![dependencies](https://david-dm.org/tandrewnichols/grunt-md.png)](https://david-dm.org/tandrewnichols/grunt-md)
+Â[![Build Status](https://travis-ci.org/tandrewnichols/grunt-md.png)](https://travis-ci.org/tandrewnichols/grunt-md) [![downloads](http://img.shields.io/npm/dm/grunt-md.svg)](https://npmjs.org/package/grunt-md) [![npm](http://img.shields.io/npm/v/grunt-md.svg)](https://npmjs.org/package/grunt-md) [![Code Climate](https://codeclimate.com/github/tandrewnichols/grunt-md/badges/gpa.svg)](https://codeclimate.com/github/tandrewnichols/grunt-md) [![dependencies](https://david-dm.org/tandrewnichols/grunt-md.png)](https://david-dm.org/tandrewnichols/grunt-md)
 
 [![NPM info](https://nodei.co/npm/grunt-md.png?downloads=true)](https://nodei.co/npm/grunt-md.png?downloads=true)
 
@@ -42,7 +42,7 @@ You can use yml to specify variables to insert into your html template.
 Then just add interpolation variables (in whatever view compiler format you prefer) to the template you specify in the configuration:
 
 ```html
-<title>{{ title }}</title>
+<title><%= title %></title>
 <!-- etc. -->
 ```
 
@@ -87,12 +87,12 @@ A simple wrapper might look like:
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <meta name="keywords" content="{{ keywords }}">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="keywords" content="<%= keywords %>">
   </head>
   <body>
-    <div class="container content">{{ content }}</div>
+    <div class="container content"><%= content %></div>
   </body>
 </html>
 ```
