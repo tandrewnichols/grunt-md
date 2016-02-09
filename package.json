@@ -1,6 +1,6 @@
 {
   "name": "grunt-md",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Compile markdown files with yml view context into html",
   "main": "./tasks/md.js",
   "scripts": {
